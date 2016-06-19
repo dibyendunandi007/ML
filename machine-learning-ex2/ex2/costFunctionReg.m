@@ -17,6 +17,13 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
+[J, grad] = costFunction(theta, X, y);
+
+% this effectively ignores "theta zero" in the following calculations
+theta_zeroed_first = [0; theta(2:length(theta));];
+
+J = J + lambda / (2 * m) * sum( theta_zeroed_first .^ 2 );
+grad = grad + (lambda / m) * theta_zeroed_first;
 
 
 
